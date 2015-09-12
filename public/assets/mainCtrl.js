@@ -36,12 +36,8 @@ angular.module('mainCtrl.runningApp', [])
                             map: $scope.map
                         });
                         map.panTo($scope.lastLocation);
-                    },
-                    function () {
-                        $scope.status = 'You cancelled the dialog.';
-
-                    });
-        };
+                    }
+        });
         $scope.message = "I'm awesome!!!";
 
 
@@ -95,7 +91,7 @@ function getArrayWithoutLastLocation(scope) {
 }
 
 function DialogController($scope, $mdDialog, types) {
-
+$scope.timespan = 10;
     $scope.myDate = new Date();
     $scope.minDate = new Date(
         $scope.myDate.getFullYear(),

@@ -9,10 +9,19 @@
             <label>Place</label>
             <input ng-model="place" type="text">
         </md-input-container>
-        <md-datepicker ng-model="myDate" placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate" flex style="width: 224px;height:74px"></md-datepicker>
-        <md-select ng-model="searchType">
-            <md-option ng-repeat="type in list">{{type}}</md-option>
+        <md-datepicker ng-model="myDate" placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+        <md-select style="margin-right: 20%;" class="time-select"  placeholder="Stunde" ng-model="hour">
+            <md-option ng-repeat="hour in hours">{{hour}}</md-option>
+            
         </md-select>
+       
+       
+        <md-select class="time-select" placeholder="Minute" ng-model="minute">
+            <md-option ng-repeat="minute in minutes">{{minute}}</md-option>
+            
+        </md-select>
+    
+        <div style="clear: both"></div>
         <md-button ng-click="answer($scope.searchText)">Let's go</md-button>
     </md-dialog-content>
 

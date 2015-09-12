@@ -42,7 +42,7 @@ function dialogCtrl($scope, $mdDialog, types) {
     $mdDialog.cancel();
   };
   $scope.answer = function(answer) {
-    $mdDialog.hide(answer);
+    $mdDialog.hide(searchText);
   };
 };
 <<<<<<< HEAD

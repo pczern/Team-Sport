@@ -30,6 +30,9 @@ angular.module('mainCtrl.runningApp', [])
                     $scope.showAdvanced(event);
                 }
             });
+        
+       
+  
 
         
         
@@ -54,7 +57,18 @@ angular.module('mainCtrl.runningApp', [])
     }]);
 
 
-        function DialogController($scope, $mdDialog) {
+        function DialogController($scope, $mdDialog, types) {
+            
+              $scope.myDate = new Date();
+      $scope.minDate = new Date(
+        $scope.myDate.getFullYear(),
+        $scope.myDate.getMonth(),
+        $scope.myDate.getDate());
+      $scope.maxDate = new Date(
+        $scope.myDate.getFullYear(),
+        $scope.myDate.getMonth(),
+        $scope.myDate.getDate() + 7);
+            $scope.list = types;
             $scope.hide = function () {
                 $mdDialog.hide();
             };

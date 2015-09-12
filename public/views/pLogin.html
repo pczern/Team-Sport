@@ -3,7 +3,9 @@
   <div class="login">
     <h1>#SocialRunning</h1>
         <h3 class="h3">Login</h3>
-      <form name="clientLogin" ng-submit="login()">
+
+            
+      <form name="clientLogin" ng-submit="login()" class="form">
         <md-input-container>
           <md-icon class="material-icons name" md-font-icon="accessibility" >accessibility</md-icon>
           <input ng-model="username" name="userName" type="text" placeholder="Name" ng-required="true">
@@ -23,6 +25,7 @@
         <md-button type="submit" class="md-raised md-primary">Login</md-button>
         <md-button type="button" class="md-no-ink" ng-href="#/register">Signup</md-button>
       </form>
+
     <footer>
       <p>Made by: <a href="https://github.com/speedDeveloper/Team-Sport">awesome persons</a></p>
     </footer>

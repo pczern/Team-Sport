@@ -4,7 +4,8 @@ angular.module('runningApp',[
     'uiGmapgoogle-maps',
     'mainCtrl.runningApp',
     'loginCtrl.runningApp',
-    'registerCtrl.runningApp'
+    'registerCtrl.runningApp',
+    "addeventCtrl.runningApp"
     
 ])
 
@@ -27,6 +28,10 @@ angular.module('runningApp',[
         .when("/addevent", {
             templateUrl: "views/pAddEvent.html",
             controller: "addeventCtrl.runningApp"
+        })
+        .when("/findevent", {
+            templateUrl: "views/pFindEvent.html",
+            controller: "findevent.runningApp"
         });
 
 

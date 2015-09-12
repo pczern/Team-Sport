@@ -22,33 +22,34 @@ exports.login = function(username, password) {
 	}).then(function(user){
 		if (user === null)
 			throw "Benutzer existiert nicht!"
-		else if (user.password != hash(password))
+		else if (user.password != password)
 			throw "Falsches Passwort!"
 
-		return Promise.resolve(user);
+		return user;
 	});
 };
 
 //Registrieren
 exports.register = function(name, email, password) {
-  console.log(name, email, password);
+  console.log("Server: " + name);
 	return User.findOne({
-    name,
-    email
+    name:name
   }).then(function(user){
     console.log(user);
 
-		if(user !== null)
+		if(user !== null) {
 			throw "Benutzer existiert bereits!";
+    } else { 
 
 	  var newuser = new User({
-			name,
-			password: hash(password),
-		  email
+			name: name,
+			password: password,
+		  email: email
 		});
 
     return newuser.save();
-	});
+	};
+});
 };
 
 exports.findEvent = function(){
@@ -83,7 +84,7 @@ exports.enterEvent = function(id, user) { // adds your ID to the event people
 
 //Google Geocoding
 exports.getCoordinates = function(location) {
-  return request.getAsync(`https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&components=locality:Köln&address=${location}`)
+  return request.getAsync('https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&components=locality:Köln&address=${location}')
   .then((response, _body) => {
     var body = JSON.parse(_body);
 
@@ -98,7 +99,7 @@ exports.getCoordinates = function(location) {
 }
 
 var getStreet = exports.getStreet = function(latitude, longitude) {
-  return request.getAsync(`https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&address=${location}`)
+  return request.getAsync("https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&address=${location}")
   .then((response, _body) => {
     var body = JSON.parse(_body);
 
@@ -113,6 +114,6 @@ var getStreet = exports.getStreet = function(latitude, longitude) {
 }
 
 //Util
-var hash = function(pwd){
+/*var hash = function(pwd){
   return crypto.createHash('sha256').update(pwd).digest('base64');
-}
+}*/

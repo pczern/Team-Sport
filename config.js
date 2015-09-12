@@ -4,8 +4,7 @@ module.exports = {
   	"user": {
   		"name": String,
   		"password": String,
-  		"email": String,
-      "session": String
+  		"email": String
   	},
   	"event": {
   		"coordinates": {

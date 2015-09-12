@@ -17,14 +17,16 @@ const userCookie = 'currentUser';
 const urlEncoded = bodyParser.urlencoded({ extended: false });
 
 router.post('/login', urlEncoded, (request, response) => {
-  database.login(request.body.username, request.body.password)
+  console.log("API: " + request.body.password);
+  database.login(request.body.name, request.body.password)
   .then((user) => response.cookie(userCookie, user).jsonp({success: true}))
   .catch((error) => response.jsonp({success: false, error: error}));
 });
 
-router.post('/register', urlEncoded, (request, response) => {
-  database.register(request.body.username, request.body.email, request.body.password)
-  .then(() => response.cookie(userCookie, user).jsonp({success: true}))
+router.post('/signup', urlEncoded, (request, response) => {
+  console.log("API: " + request.body.password);
+  database.register(request.body.name, request.body.email, request.body.password)
+  .then((user) => response.cookie(userCookie, user).jsonp({success: true}))
   .catch((error) => {
     console.warn(error);
     response.jsonp({success: false, error: error})

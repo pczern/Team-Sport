@@ -7,13 +7,16 @@ angular.module('registerCtrl.runningApp', [])
         'email': $scope.email,
         'password': $scope.password
       };
-
+      alert(user.password);
       $http({
         method: 'POST',
-        url: '/api/register',
+        url: '/api/signup',
         data: param(user),
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }).then(function(response) {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(function(response) {
           console.log(response.data);
           if (response.data.success === true)
             $location.path("/main")

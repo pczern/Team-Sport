@@ -40,8 +40,8 @@ angular.module('mainCtrl.runningApp', [])
                     function () {
                         $scope.status = 'You cancelled the dialog.';
 
-                    });
-        };
+                    };
+        });
         $scope.message = "I'm awesome!!!";
 
 

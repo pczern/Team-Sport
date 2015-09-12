@@ -15,8 +15,13 @@
 
     <div layout="row" flex id="content">
         <md-content layout="column" flex >
-            <!--Die Karte -->
-            <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+
+        <!--Die Karte -->
+        <map center="-25.363882,131.044922" zoom="4">
+          <info-window position="current-location" visible="true">
+      <span>Location found using HTML5.</span>
+    </info-window>
+        </map>
         </md-content>
     </div>
 </div>

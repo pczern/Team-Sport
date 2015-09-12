@@ -2,13 +2,15 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var request = require('request');
 var Promise = require("bluebird");
 var config = require('./config');
 var hat = require('hat');
 
 var User = mongoose.model("User", new Schema(config.schemas.user));
 var Event = mongoose.model('Event', new Schema(config.schemas.event));
+
+Promise.promisify(request);
 
 mongoose.connect(config.database);
 
@@ -17,11 +19,10 @@ exports.login = function(username, password) {
 	return User.findOne({
 		name: username
 	}).exec().then(function(user){
-		if (!user) {
+		if (!user)
 			throw "Benutzer existiert nicht!"
-		} else if (user.password != password){
+		else if (user.password != password)
 			throw "Falsches Passwort!"
-		}
 
 		return Promise.resolve(user);
 	});
@@ -71,5 +72,42 @@ exports.enterEvent = function(id, user) { // adds your ID to the event people
   .then(function(event) {
     event.people.push(user.id);
     return event.save().exec();
+  });
+}
+
+//Google Geocoding
+exports.getCoordinates = function(location) {
+  return request.getAsync(`https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&address=${location}`)
+  .then((response, _body) => {
+    var body = JSON.parse(_body);
+    //TODO: SECURITY WARNING - O(n^2) code.
+
+    //Locality
+    var candidates = [];
+
+    if(body.status === 'ZERO_RESULTS' || body.status === 'OVER_QUERY_LIMIT')
+      return Promise.resolve();
+
+    if(body.status !== 'OK')
+      throw body.error_message;
+
+    body.results.forEach(function(result) {
+      var componentIndex;
+      var isLocality = result['address_components'].some(function(component, index) {
+        return component.types.some(function(type) {
+          if(type === 'locality') {
+            componentIndex = index;
+            return true;
+          }
+
+          return false;
+        });
+      });
+
+      if(isLocality && result['address_components'][componentIndex] === 'Köln')
+        candidates.push(result);
+    });
+
+    return Promise.resolve(candidates[0]);
   });
 }

@@ -21,7 +21,8 @@
     "cookie-parser": "latest",
     "body-parser": "latest",
     "bluebird": "latest",
-    "hat": "latest"
+    "hat": "latest",
+    "request": "latest"
   },
   "homepage": "https://github.com/speedDeveloper/Team-Sport#readme"
 }

@@ -11,6 +11,7 @@ angular.module('mainCtrl.runningApp', [])
                 })
                 .then(function (answer) {
                     $scope.status = 'You said the information was "' + answer + '".';
+
                 }, function () {
                     $scope.status = 'You cancelled the dialog.';
                 });
@@ -18,21 +19,50 @@ angular.module('mainCtrl.runningApp', [])
         $scope.message = "I'm awesome!!!";
         var map;
         $scope.$on('mapInitialized', function (evt, evtMap) {
-            map = evtMap;
+                map = evtMap;
+                var event;
+                $scope.placeMarker = function (e) {
+                        event = e;
+                        var marker = new google.maps.Marker({
+                            position: e.latLng,
+                            map: map
+                        });
+                        map.panTo(e.latLng);
+                        $scope.showAdvanced(event);
+
+                        $scope.lastLocation
+                        var marker = new google.maps.Marker({
+                            position: $scope.lastLocation,
+                            map: $scope.map
+                        });
+                        map.panTo($scope.lastLocation);
+                    },
+                    function () {
+                        $scope.status = 'You cancelled the dialog.';
+
+                    });
+        };
+        $scope.message = "I'm awesome!!!";
+
+
+        $scope.$on('mapInitialized', function (evt, evtMap) {
+            $scope.map = evtMap;
             var event;
+
             $scope.placeMarker = function (e) {
+
                 event = e;
-                var marker = new google.maps.Marker({
-                    position: e.latLng,
-                    map: map
-                });
-                map.panTo(e.latLng);
+
+                $scope.lastLocation = e.latLng;
+
                 $scope.showAdvanced(event);
+
+
+            }
+            $scope.createEvent = function () {
+
             }
         });
-
-
-
 
 
 
@@ -56,6 +86,13 @@ angular.module('mainCtrl.runningApp', [])
 
     }]);
 
+function getArrayWithoutLastLocation(scope) {
+    return scope.positions.map(function (element) {
+        if (!(scope.lastLocation === element))
+            return true;
+    });
+
+}
 
 function DialogController($scope, $mdDialog, types) {
 
@@ -78,7 +115,10 @@ function DialogController($scope, $mdDialog, types) {
         $mdDialog.cancel();
     };
     $scope.answer = function (answer) {
-        $mdDialog.hide();
+
+
+        $mdDialog.hide(answer);
+
     };
 }
 

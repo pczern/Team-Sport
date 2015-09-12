@@ -22,3 +22,18 @@
             <md-icon class="material-icons name" md-font-icon="exposure_plus_1" >exposure_plus_1</md-icon>
         </md-button>
 </div>
+
+
+<script>
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude; 
+}
+</script>

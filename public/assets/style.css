@@ -27,14 +27,14 @@ footer p {
   letter-spacing: .4px;
 }
 /* Form Styles */
-form {
+/*form {
   width: 340px;
   margin: 4em auto;
   padding: 3em 2em 2em 2em;
   background: #fafafa;
   border: 1px solid #ebebeb;
   box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
-}
+}*/
 
 .inputIconDemo {
   min-height: 48px;
@@ -129,10 +129,18 @@ div[ng-view]{
     background-color: #FFF;
 }
 */
+md-toolbar h1{
+color: #FFF;
+}
+
 .time-select{
 width: 40%;
     float: left;
     
+}
+h3{
+    margin-bottom: 0em;
+    font-weight: normal;
 }
 .dialogdemoBasicUsage #popupContainer {
   position: relative; }
@@ -141,3 +149,18 @@ width: 40%;
   color: blue;
   text-decoration: underline; }
 
+md-dialog{
+width: 90%;
+}
+
+@media (min-width: 600px){
+md-dialog{
+width: 55%;
+}
+    @media (min-width: 950px){
+        md-dialog{
+width: 35%;
+}
+    }
+
+}

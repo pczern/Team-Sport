@@ -5,7 +5,7 @@
         <md-button class="md-icon-button" aria-label="More">
             <md-icon class="material-icons name" md-font-icon="more_vert" >more_vert</md-icon>
         </md-button>
-        <md-button class="md-icon-button" aria-label="More">
+        <md-button class="md-icon-button" aria-label="More" ng-click="showSearch()">
             <md-icon class="material-icons name" md-font-icon="search" >search</md-icon>
         </md-button>
        
@@ -15,6 +15,7 @@
 
     <div layout="row" flex id="content">
         <md-content layout="column" flex >
+
         <!--Die Karte -->
         <map center="-25.363882,131.044922" zoom="4">
           <info-window position="current-location" visible="true">
@@ -23,18 +24,4 @@
         </map>
         </md-content>
     </div>
-        <md-fab-toolbar md-open="false" count="0" md-direction="right">
-            <md-fab-trigger class="align-with-text">
-            <md-button aria-label="menu" class="md-fab md-primary">
-                <md-icon class="material-icons name" md-font-icon="search" >search</md-icon>
-            </md-button>
-        </md-fab-trigger>
-            <md-toolbar>
-                <md-fab-actions class="md-toolbar-tools">
-                    <md-button aria-label="comment" class="md-icon-button">
-                        <md-icon md-svg-src="img/icons/ic_comment_24px.svg"></md-icon>
-                    </md-button>
-                </md-fab-actions>
-            </md-toolbar>
-        </md-fab-toolbar>
 </div>

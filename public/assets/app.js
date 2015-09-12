@@ -38,4 +38,8 @@ angular.module('runningApp',[
   
     }
 
-);
+).factory('types',function(){
+    
+    var types = ['Joggen','Rennen','Spazieren','Biken','Sudoku'];
+    return types;
+});

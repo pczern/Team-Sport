@@ -1,4 +1,4 @@
-angular.module('runningApp',[
+var app =angular.module('runningApp',[
     'ngMaterial',
     'ngRoute',
     'ngMap',
@@ -39,3 +39,5 @@ angular.module('runningApp',[
     }
 
 );
+
+

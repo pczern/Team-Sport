@@ -129,7 +129,11 @@ div[ng-view]{
     background-color: #FFF;
 }
 */
-
+.time-select{
+width: 40%;
+    float: left;
+    
+}
 .dialogdemoBasicUsage #popupContainer {
   position: relative; }
 .dialogdemoBasicUsage .debt-be-gone {

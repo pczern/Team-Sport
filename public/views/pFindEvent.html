@@ -1,0 +1,15 @@
+<md-dialog aria-label="Suche">
+    
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+           <h1>Suche</h1>
+            <md-input-container>
+                <label>Search</label>
+                <input ng-model="searchText" type="text">
+            </md-input-container>
+            <md-select ng-model="searchType">
+                <md-option ng-repeat="type in list" >{{type}}</md-option>
+            </md-select>
+            <md-button ng-click="answer()">Let's go</md-button>
+        </md-dialog-content>
+ 
+</md-dialog>

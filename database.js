@@ -2,13 +2,16 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var request = require('request');
 var Promise = require("bluebird");
 var config = require('./config');
 var hat = require('hat');
+var crypto = require('crypto');
 
 var User = mongoose.model("User", new Schema(config.schemas.user));
 var Event = mongoose.model('Event', new Schema(config.schemas.event));
+
+Promise.promisify(request);
 
 mongoose.connect(config.database);
 
@@ -16,12 +19,11 @@ mongoose.connect(config.database);
 exports.login = function(username, password) {
 	return User.findOne({
 		name: username
-	}).exec().then(function(user){
-		if (!user) {
+	}).then(function(user){
+		if (user === null)
 			throw "Benutzer existiert nicht!"
-		} else if (user.password != password){
+		else if (user.password != hash(password))
 			throw "Falsches Passwort!"
-		}
 
 		return Promise.resolve(user);
 	});
@@ -31,21 +33,22 @@ exports.login = function(username, password) {
 exports.register = function(username, password, email) {
 	return User.findOne({
 		name: username
-	}).exec().then(function(user){
-		if (user) {
+	}).then(function(user){
+		if(user)
 			throw "Benutzer existiert bereits!"
-		}
 
-		return new User({
-					name: username,
-					password: password,
-					email: email
-		}).save().exec();
+	  var user = new User({
+			name: username,
+			password: hash(password),
+		  email: email
+		});
+
+    return user.save();
 	});
 };
 
 exports.findEvent = function(){
-  return Event.find().exec();
+  return Event.find();
 }
 
 exports.addEvent = function(object, user) { //object is the
@@ -62,14 +65,57 @@ exports.addEvent = function(object, user) { //object is the
     people: [user.id]
   });
 
-  return event.save().exec();
+  return event.save();
 }
 
 //id = event id
 exports.enterEvent = function(id, user) { // adds your ID to the event people
-  return Event.find({id}).exec()
+  return Event.find({id})
   .then(function(event) {
     event.people.push(user.id);
-    return event.save().exec();
+    return event.save();
   });
+}
+
+//Google Geocoding
+exports.getCoordinates = function(location) {
+  return request.getAsync(`https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&address=${location}`)
+  .then((response, _body) => {
+    var body = JSON.parse(_body);
+    //TODO: SECURITY WARNING - O(n^2) code.
+
+    //Locality
+    var candidates = [];
+
+    if(body.status === 'ZERO_RESULTS' || body.status === 'OVER_QUERY_LIMIT')
+      return Promise.resolve();
+
+    if(body.status !== 'OK')
+      throw body.error_message;
+
+    body.results.forEach(function(result) {
+      var componentIndex;
+      var isLocality = result['address_components'].some(function(component, index) {
+        return component.types.some(function(type) {
+          if(type === 'locality') {
+            componentIndex = index;
+            return true;
+          }
+
+          return false;
+        });
+      });
+
+      if(isLocality && result['address_components'][componentIndex] === 'Köln')
+        candidates.push(result);
+    });
+
+    return Promise.resolve(candidates[0]);
+  });
+}
+
+
+//Util
+var hash = function(pwd){
+  crypto.createHash('sha256').update(pwd).digest('base64');
 }

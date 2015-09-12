@@ -1,12 +1,12 @@
 angular.module('mainCtrl.runningApp', [])
-    .controller('mainCtrl', ['$scope', '$mdDialog', function ($scope, $mdDialog) {
+    .controller('mainCtrl', ['$scope', '$mdDialog', "$http", function ($scope, $mdDialog, $http) {
         $http.get("/api/find/events")
         .then(function(response) {
             $scope.locs = response.data;
             console.log(response.data);
         }, function(response) {
             console.log("Error: " + response.data);
-        })
+        });
         $scope.positions = [];
         $scope.showAdvanced = function (ev) {
             $mdDialog.show({
@@ -99,7 +99,7 @@ function getArrayWithoutLastLocation(scope) {
 
 }
 
-function DialogController($scope, $mdDialog, types) {
+function DialogController($scope, $mdDialog, $http, types) {
 $scope.timespan = 10;
     $scope.myDate = new Date();
     $scope.minDate = new Date(

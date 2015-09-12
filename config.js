@@ -19,5 +19,6 @@ module.exports = {
       "end": Date,
   		"people": Array // ids
   	}
-  }
+  },
+  "maps": "AIzaSyATjz0wjKUiSlLWwmB32kEp9A8rW0KeTUw" //Google Maps API key
 };

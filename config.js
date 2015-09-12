@@ -1,4 +1,6 @@
-{
+
+
+module.exports = {
   "database": "mongodb://master:master@ds051170.mongolab.com:51170/team-sport",
   "schemas": {
   	"user": {

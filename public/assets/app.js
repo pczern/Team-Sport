@@ -1,6 +1,7 @@
 angular.module('runningApp',[
     'ngMaterial',
     'ngRoute',
+    'uiGmapgoogle-maps',
     'mainCtrl.runningApp',
     'loginCtrl.runningApp',
     'registerCtrl.runningApp'

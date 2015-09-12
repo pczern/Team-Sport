@@ -103,3 +103,4 @@ footer a:focus {
 .view{
     height: 100vh;
 }
+.angular-google-map-container { height: 100%; }

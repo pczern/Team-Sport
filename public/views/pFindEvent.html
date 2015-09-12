@@ -9,7 +9,7 @@
             <md-select ng-model="searchType">
                 <md-option ng-repeat="type in list" >{{type}}</md-option>
             </md-select>
-            <md-button ng-click="answer()">Let's go</md-button>
+            <md-button ng-click="answer($scope.searchText)">Let's go</md-button>
         </md-dialog-content>
  
 </md-dialog>

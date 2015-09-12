@@ -6,6 +6,7 @@ var Promise = require("bluebird");
 var config = require('./config');
 mongoose.connect(config.database);
 var User = mongoose.model("User", new Schema(config.schemas.user));
+var Location = mongoose.model('Location', new Schema(config.schemas.location));
 
 //Login
 
@@ -44,7 +45,6 @@ exports.register = function(username, password, email) {
 
 	})
 };
-var Location = mongoose.model('Location', new Schema(config.schemas.location));
 
 exports.findLocations = function(){
   return Location.find().exec();

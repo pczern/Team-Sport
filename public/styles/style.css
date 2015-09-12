@@ -1,2 +1,108 @@
+/* line 1, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+body {
+  background: #eee;
+  -webkit-font-smoothing: antialiased; }
+
+/* line 6, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+.login {
+  margin-top: 4em;
+  text-align: center; }
+
+/* line 12, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+h1,
+h3 {
+  font-weight: 300; }
+
+/* line 16, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+h1 {
+  color: #636363; }
+
+/* line 20, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+h3 {
+  color: #4a89dc; }
+
+/* line 24, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+footer p {
+  color: #888;
+  font-size: 13px;
+  letter-spacing: .4px; }
+
+/* Form Styles */
+/* line 30, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+form {
+  width: 340px;
+  margin: 4em auto;
+  padding: 3em 2em 2em 2em;
+  background: #fafafa;
+  border: 1px solid #ebebeb;
+  box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px; }
+
+/* line 39, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+.inputIconDemo {
+  min-height: 48px; }
+
+/* line 43, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+md-input-container:not(.md-input-invalid) > md-icon.email {
+  color: green; }
+
+/* line 47, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+md-input-container.md-icon-float {
+  margin-bottom: 10px; }
+
+/* line 51, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+md-input-container:not(.md-input-invalid) > md-icon.name {
+  color: #4a89dc; }
+
+/* line 56, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+md-input-container.md-input-invalid > md-icon.email,
+.inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+  color: red; }
+
+/* line 61, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+md-input-container ng-messages,
+md-input-container [ng-messages] {
+  padding-left: 36px; }
+
+/* line 65, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+.md-button.md-raised:not([disabled]) {
+  width: 100%;
+  margin-top: 40px;
+  background-color: #4a89dc;
+  height: 48px;
+  color: white; }
+
+/* line 73, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+.md-button.md-primary.md-raised:not([disabled]):hover, .md-button.md-primary.md-fab:not([disabled]):hover {
+  background-color: #357DDC; }
+
+/* Footer Styles */
+/* line 78, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+footer a {
+  color: #4a89dc;
+  text-decoration: none;
+  transition: all 0.2s ease; }
+
+/* line 84, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+footer a:hover {
+  color: #666;
+  text-decoration: underline; }
+
+/* line 89, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+footer img {
+  width: 180px;
+  transition: all 0.2s ease; }
+
+/* line 94, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+footer img:hover {
+  opacity: .83; }
+
+/* line 99, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+footer img:focus,
+footer a:focus {
+  outline: none; }
+
+/* line 103, C:/Users/phili_000/Documents/Team-Sport/public/styles/style.scss */
+.view {
+  height: 100vh; }
 
 /*# sourceMappingURL=style.css.map */

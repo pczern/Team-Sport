@@ -12,7 +12,7 @@ angular.module('registerCtrl.runningApp', [])
           if (response.data.success === true)
             $location.path("/main")
           else
-            alert(data.error);
+            alert(response.data.error);
         }, function(response) {
           alert(response.data.error);
         });

@@ -4,8 +4,7 @@ var app =angular.module('runningApp',[
     'ngMap',
     'mainCtrl.runningApp',
     'loginCtrl.runningApp',
-    'registerCtrl.runningApp',
-    "addeventCtrl.runningApp"
+    'registerCtrl.runningApp'
     
 ])
 

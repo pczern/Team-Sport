@@ -104,6 +104,9 @@ footer a:focus {
     height: 100vh;
 }
 
+.angular-google-map-container { height: 100%; }
+
+
 
     
 /*        md-toolbar {
@@ -125,3 +128,4 @@ div[ng-view]{
     max-height: 100%;
     background-color: #FFF;
 }
+

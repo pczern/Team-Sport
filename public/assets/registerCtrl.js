@@ -6,7 +6,14 @@ angular.module('registerCtrl.runningApp',[])
                 'name'      : $scope.username,
                 'email'     : $scope.email,
                 'password'  : $scope.password
-            }
+            };
+            $http.post("/api/register", user)
+            .then(function(response) {;
+                console.log(response.data);
+                $location.path("/main")
+            }, function(response) {
+                console.log("Error: " + response.data)
+            });
             console.log(user);
         }
     }]);

@@ -16,24 +16,10 @@
     <div layout="column" flex id="content">
         <md-content layout="column" flex class="md-padding">
         <h1>Große Karte, ihr wisst schon...</h1>
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
         </md-content>
     </div>
         <md-button class="md-fab md-fab-bottom-right" aria-label="+">
             <md-icon class="material-icons name" md-font-icon="exposure_plus_1" >exposure_plus_1</md-icon>
         </md-button>
 </div>
-
-
-<script>
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-}
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude; 
-}
-</script>

@@ -15,8 +15,7 @@ angular.module('loginCtrl.runningApp',[])
               else
                 alert(data.error);
             }, function(response) {
-                alert(JSON.parse(response).error)
+                alert(JSON.parse(response).error);
             });
-            console.log(user);
         }
     }]);

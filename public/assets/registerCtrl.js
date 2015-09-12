@@ -8,12 +8,15 @@ angular.module('registerCtrl.runningApp',[])
                 'password'  : $scope.password
             };
             $http.post("/api/register", user)
-            .then(function(response) {;
-                console.log(response.data);
+            .then(function(response) {
+              var data = JSON.parse(response.data);
+
+              if(data.success === true)
                 $location.path("/main")
+              else
+                alert(data.error);
             }, function(response) {
-                console.log("Error: " + response.data)
+                alert(JSON.parse(response).error);
             });
-            console.log(user);
         }
     }]);

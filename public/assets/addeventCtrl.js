@@ -1,2 +1,4 @@
 angular.module("addeventCtrl.runningApp", [])
-.controller("addeventCtrl", )
+.controller("addeventCtrl", ['$scope',function($scope){
+
+}]);

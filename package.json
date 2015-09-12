@@ -1,0 +1,23 @@
+{
+  "name": "teamsport",
+  "version": "1.0.0",
+  "description": "Eine Sportapp zum Sozialisieren beim Sport machen",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/speedDeveloper/Team-Sport.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/speedDeveloper/Team-Sport/issues"
+  },
+  "dependencies": {
+    "express": "latest",
+    "mongoose": "latest"
+  }
+  "homepage": "https://github.com/speedDeveloper/Team-Sport#readme"
+}

@@ -19,7 +19,8 @@
     "express": "latest",
     "mongoose": "latest",
     "cookie-parser": "latest",
-    "body-parser": "latest"
+    "body-parser": "latest",
+    "bluebird": "latest"
   },
   "homepage": "https://github.com/speedDeveloper/Team-Sport#readme"
 }

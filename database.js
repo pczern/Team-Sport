@@ -52,7 +52,7 @@ exports.register = function(name, email, password) {
 });
 };
 
-exports.findEvent = function(){
+exports.findEvents = function(){
   return Event.find();
 }
 

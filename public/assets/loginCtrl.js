@@ -8,12 +8,14 @@ angular.module('loginCtrl.runningApp',[])
             };
             $http.post("/api/login", user)
             .then(function(response) {
-                $scope.cookie = response.data;
-                console.log($scope.cookie);
+              var data = JSON.parse(response.data);
+
+              if(data.success === true)
                 $location.path("/main")
+              else
+                alert(data.error);
             }, function(response) {
-                console.log("Error: " + response.data)
+                alert(JSON.parse(response).error);
             });
-            console.log(user);
         }
     }]);

@@ -15,4 +15,4 @@ app.get('/register', (request, response) => response.sendFile('public/register.h
 
 app.use('/api', require('./api'));
 
-http.createServer(app).listen(8080);
+http.createServer(app).listen(8080, () => console.log('Server responding on port 8080.'));

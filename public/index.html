@@ -1,11 +1,16 @@
 <html ng-app="runningApp">
     <head>
+        <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Social Running</title> 
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
-        <meta name="viewport" content="initial-scale=1" />   
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+        <link rel="stylesheet" href="assets/style.css">   
     </head>
-    <body>
+    <body layout="column">
         <div ng-view></div>   
        
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
@@ -16,6 +21,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.js"></script>    
         <script src="assets/loginCtrl.js"></script>
         <script src="assets/registerCtrl.js"></script>
+        <script src="assets/mainCtrl.js"></script>
         <script src="assets/app.js"></script>
     </body>
 </html>

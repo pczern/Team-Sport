@@ -1,3 +1,33 @@
-<h1>Login</h1>
-<h1>Login</h1>
-<a href="#/register">dewfDFSVFDSBDFVJHOIÖDFSJVÖWHAZVIODS<HVUSH</a>
+<div layout="row" layout-align="center center">
+
+  <div class="login">
+    <h1>#SocialRunning</h1>
+        <h3>Login</h3>
+      <form name="clientLogin" ng-submit="login()">
+        <md-input-container>
+          <md-icon class="material-icons name" md-font-icon="accessibility" >accessibility</md-icon>
+          <input ng-model="username" name="userName" type="text" placeholder="Name" ng-required="true">
+          <div ng-show="clientLogin.userName.$touched" ng-messages="clientLogin.userName.$error">
+            <div ng-message="required">Your full name is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container md-no-float>
+          <!-- Use floating placeholder instead of label -->
+          <md-icon class="material-icons" md-font-icon="email" >email</md-icon>
+          <input ng-model="password" type="password" placeholder="Password" ng-required="true" name="userPassword">
+          <div ng-show="clientLogin.userPassword.$touched" ng-messages="clientLogin.userPassword.$error">
+            <div ng-message="required">Your password is required.</div>
+          </div>
+        </md-input-container>
+
+        <md-button type="submit" class="md-raised md-primary">Login</md-button>
+        <md-button type="button" class="md-no-ink" ng-href="#/register">Signup</md-button>
+      </form>
+    <footer>
+      <p>Made by: Unsere Namen</p>
+    </footer>
+
+  </div>
+
+
+</div>

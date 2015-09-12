@@ -4,17 +4,20 @@ module.exports = {
   	"user": {
   		"name": String,
   		"password": String,
-  		"email": String
+  		"email": String,
+      "session": String
   	},
-  	"location": {
+  	"event": {
   		"coordinates": {
         type: [Number],
         index: "2d"
   		},
-  		"name": String,
+      "name": String,
+  		"type": String,
   		"description": String,
-  		"date": Date,
-  		"people": Array
+  		"start": Date,
+      "end": Date,
+  		"people": Array // ids
   	}
   }
 };

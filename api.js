@@ -18,15 +18,13 @@ const urlEncoded = bodyParser.urlencoded({ extended: false });
 
 router.post('/login', urlEncoded, (request, response) => {
   database.login(request.body.username, request.body.password)
-  .then((user) => {
-    response.cookie(userCookie, user).jsonp({success: true});
-  });
+  .then((user) => response.cookie(userCookie, user).jsonp({success: true}))
   .catch((error) => response.jsonp({success: false, error: error}));
 });
 
 router.post('/register', urlEncoded, (request, response) => {
   database.register(request.body.username, request.body.email, request.body.password)
-  .then(() => response.jsonp({success: true}));
+  .then(() => response.cookie(userCookie, user).jsonp({success: true}))
   .catch((error) => response.jsonp({success: false, error: error}));
 });
 
@@ -34,13 +32,13 @@ router.use(cookieParser());
 
 router.get('/find/locations', (request, response) => {
   database.findLocations()
-  .then((locations) => response.jsonp(locations));
+  .then((locations) => response.jsonp(locations))
   .catch((error) => response.jsonp({success: false, error: error}));
 });
 
 router.post('/add/location', urlEncoded, (request, response) => {
   database.addLocation(request.body)
-  .then(() => response.jsonp({success: true}));
+  .then(() => response.jsonp({success: true}))
   .catch((error) => response.jsonp({success: false, error: error}));
 });
 
@@ -49,7 +47,7 @@ router.post('/location/:id/enter', (request, response) => {
     if(!request.cookies[userCookie])
       throw 'You aren\'t logged in.';
 
-    return database.enterEvent(request.params.id, request.cookies[userCookie])
+    return database.enterEvent(request.params.id, JSON.parse(request.cookies[userCookie]).id)
   }).then(() => response.jsonp({success: true}))
   .catch((error) => response.jsonp({success: false, error: error}));
 });

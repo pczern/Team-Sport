@@ -83,7 +83,7 @@ function dialogCtrl($scope, $mdDialog, types) {
     $mdDialog.cancel();
   };
   $scope.answer = function(answer) {
-    $mdDialog.hide(searchText);
+    $mdDialog.hide($scope.searchText);
   };
 };
 

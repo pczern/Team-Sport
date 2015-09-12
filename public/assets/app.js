@@ -1,7 +1,8 @@
 angular.module('runningApp',[
     'ngMaterial',
     'ngRoute',
-    'loginCtrl.runningApp'
+    'loginCtrl.runningApp',
+    'registerCtrl.runningApp'
     
 ])
 
@@ -9,12 +10,12 @@ angular.module('runningApp',[
     $routeProvider
         .when('/', {
             templateUrl: 'views/pLogin.html',
-            controller: 'loginCtroller',
+            controller: 'loginCtrl',
   
         })
         .when('/register', {
             templateUrl: 'views/pRegister.html',
-            controller: 'registerController'
+            controller: 'registerCtrl'
         });
 
 

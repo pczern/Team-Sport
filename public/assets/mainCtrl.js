@@ -1,5 +1,5 @@
 angular.module('mainCtrl.runningApp', [])
-    .controller('mainCtrl', ['$scope', '$mdDialog', "$http", function ($scope, $mdDialog, $http) {
+    .controller('mainCtrl', ['$scope', '$mdDialog', "$http", "$rootScope", function ($scope, $mdDialog, $http, $rootScope) {
         $http.get("/api/find/events")
         .then(function(response) {
             $scope.locs = response.data;
@@ -18,7 +18,11 @@ angular.module('mainCtrl.runningApp', [])
                 })
                 .then(function (answer) {
                     $scope.status = 'You said the information was "' + answer + '".';
-
+                        var marker = new google.maps.Marker({
+                            position: $rootScope.lastLocation,
+                            map: $rootScope.map
+                        });
+                            $rootScope.map.panTo($rootScope.lastLocation);
                 }, function () {
                     $scope.status = 'You cancelled the dialog.';
                 });
@@ -30,20 +34,10 @@ angular.module('mainCtrl.runningApp', [])
                 var event;
                 $scope.placeMarker = function (e) {
                         event = e;
-                        var marker = new google.maps.Marker({
-                            position: e.latLng,
-                            map: map
-                        });
-                        map.panTo(e.latLng);
                         $scope.showAdvanced(event);
 
-                        $scope.lastLocation
-                        var marker = new google.maps.Marker({
-                            position: $scope.lastLocation,
-                            map: $scope.map
-                        });
-                        map.panTo($scope.lastLocation);
-
+                       $rootScope.lastLocation = e.latLng;
+                       $rootScope.map = evtMap;
                     };
 
         });
@@ -99,7 +93,7 @@ function getArrayWithoutLastLocation(scope) {
 
 }
 
-function DialogController($scope, $mdDialog, $http, types) {
+function DialogController($scope, $mdDialog, $http, $rootScope, types) {
 $scope.timespan = 10;
     $scope.myDate = new Date();
     $scope.minDate = new Date(
@@ -125,6 +119,22 @@ $scope.timespan = 10;
         $mdDialog.hide(answer);
 
     };
+
+    $scope.addPin = function() {
+        $scope.eventz = {
+            type: $scope.type,
+            name: $scope.place,
+            description: $scope.user.biography,
+            start: $scope.minDate,
+            end: $scope.maxDate,
+            people: []
+        }
+        console.log($rootScope.lastLocation);
+       /* $http.post("api/add/event", $rootScope)
+        .then(function(response) {
+
+        })*/
+    }
 }
 
 

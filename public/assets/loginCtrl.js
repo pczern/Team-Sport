@@ -14,10 +14,14 @@ angular.module('loginCtrl.runningApp', [])
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).then(function(response) {
-        if (response.data.success === true)
-          $location.path("/main")
-        else
+        if (response.data.success === true) {
+          $location.path("/main");
+          $rootScope.cookie = response.data.cookie;
+        }
+      
+        else {
           alert(response.data.error);
+        }
       }, function(response) {
         alert(response.data.error);
       });

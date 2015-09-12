@@ -2,8 +2,7 @@
 angular.module('mainCtrl.runningApp',[])
     .controller('mainCtrl',['$scope', '$mdDialog',function($scope, $mdDialog){
         $scope.message  = "I'm awesome!!!";
-<<<<<<< HEAD
-        $scope.map = { center: { latitude: 51, longitude: 7 }, zoom: 10 };
+       $scope.map = { center: { latitude: 51, longitude: 7 }, zoom: 10 };
         
         $scope.showSearch = function(ev) {
         $mdDialog.show({
@@ -15,15 +14,18 @@ angular.module('mainCtrl.runningApp',[])
         })
         .then(function(searchText) {
             $scope.status = 'You said the information was "' + searchText + '".';
+            console.log(searchText);
         }, function() {
             $scope.status = 'You cancelled the dialog.';
         }
-            console.log(searchText);     
+                 
         );
       };
     }]);
 
-function dialogCtrl($scope, $mdDialog) {
+function dialogCtrl($scope, $mdDialog, types) {
+    $scope.list = types;
+    
   $scope.hide = function() {
     $mdDialog.hide();
   };
@@ -34,8 +36,6 @@ function dialogCtrl($scope, $mdDialog) {
     $mdDialog.hide(answer);
   };
 };
-=======
-        
-    }]);
 
->>>>>>> 034c1277c57e106ee44c399b092479c1e51754c1
+        
+

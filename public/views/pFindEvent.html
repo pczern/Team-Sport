@@ -1,19 +1,14 @@
 <md-dialog aria-label="Suche">
-    <form>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Suche</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon class="material-icons name" md-font-icon="close" >close</md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
+    
         <md-dialog-content style="max-width:800px;max-height:810px; ">
+           <h1>Suche</h1>
             <md-input-container>
                 <label>Search</label>
                 <input ng-model="searchText" type="text">
             </md-input-container>
+            <md-select ng-model="searchType">
+                <md-option ng-repeat="type in list" >{{type}}</md-option>
+            </md-select>
         </md-dialog-content>
-    </form>
+ 
 </md-dialog>

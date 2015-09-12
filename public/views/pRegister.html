@@ -11,13 +11,6 @@
             <div ng-message="required">Your full name is required.</div>
           </div>
         </md-input-container>
-         <md-input-container>
-          <md-icon class="material-icons name" md-font-icon="email" >email</md-icon>
-          <input ng-model="email" name="userMail" type="email" placeholder="Name" ng-required="true">
-          <div ng-show="clientLogin.userMail.$touched" ng-messages="clientLogin.userMail.$error">
-            <div ng-message="required">Your full name is required.</div>
-          </div>
-        </md-input-container>
         <md-input-container md-no-float>
           <!-- Use floating placeholder instead of label -->
           <md-icon class="material-icons" md-font-icon="email" >email</md-icon>
@@ -26,6 +19,14 @@
             <div ng-message="required">Your password is required.</div>
           </div>
         </md-input-container>
+         <md-input-container>
+          <md-icon class="material-icons name" md-font-icon="email" >email</md-icon>
+          <input ng-model="email" name="userMail" type="email" placeholder="Email" ng-required="true">
+          <div ng-show="clientLogin.userMail.$touched" ng-messages="clientLogin.userMail.$error">
+            <div ng-message="required">Your full name is required.</div>
+          </div>
+        </md-input-container>
+        
 
         <md-button type="submit" class="md-raised md-primary">Register</md-button>
         <md-button type="button" class="md-no-ink" ng-href="#/">Login</md-button>

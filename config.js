@@ -9,7 +9,7 @@ module.exports = {
   	"location": {
   		"coordinates": {
         type: [Number],
-        index: '2d'
+        index: "2d"
   		},
   		"name": String,
   		"description": String,

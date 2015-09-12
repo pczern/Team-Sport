@@ -1,5 +1,5 @@
 angular.module('mainCtrl.runningApp', [])
-    .controller('mainCtrl', ['$scope', '$mdDialog', "$http", function ($scope, $mdDialog, $http) {
+    .controller('mainCtrl', ['$scope', '$mdDialog', "$http", "$rootScope", "coordinates", function ($scope, $mdDialog, $http, $rootScope, coordinates) {
         $http.get("/api/find/events")
         .then(function(response) {
             $scope.locs = response.data;
@@ -18,56 +18,37 @@ angular.module('mainCtrl.runningApp', [])
                 })
                 .then(function (answer) {
                     $scope.status = 'You said the information was "' + answer + '".';
-
+                        var marker = new google.maps.Marker({
+                            position: {K: coordinates.getLongitude(), G: coordinates.getLatitude()},
+                            map: $scope.map
+                        });
+                            
                 }, function () {
                     $scope.status = 'You cancelled the dialog.';
                 });
         };
         $scope.message = "I'm awesome!!!";
         var map;
+                      var event;
         $scope.$on('mapInitialized', function (evt, evtMap) {
                 map = evtMap;
-                var event;
+               
                 $scope.placeMarker = function (e) {
+                    console.log(e.latLng);
+     
+                    coordinates.setCoordinates(e.latLng.K, e.latLng.G);
+                    $scope.map = map;
                         event = e;
-                        var marker = new google.maps.Marker({
-                            position: e.latLng,
-                            map: map
-                        });
-                        map.panTo(e.latLng);
                         $scope.showAdvanced(event);
 
-                        $scope.lastLocation
-                        var marker = new google.maps.Marker({
-                            position: $scope.lastLocation,
-                            map: $scope.map
-                        });
-                        map.panTo($scope.lastLocation);
-
+            
                     };
 
         });
         $scope.message = "I'm awesome!!!";
 
 
-        $scope.$on('mapInitialized', function (evt, evtMap) {
-            $scope.map = evtMap;
-            var event;
-
-            $scope.placeMarker = function (e) {
-
-                event = e;
-
-                $scope.lastLocation = e.latLng;
-
-                $scope.showAdvanced(event);
-
-
-            }
-            $scope.createEvent = function () {
-
-            }
-        });
+      
 
 
 
@@ -99,7 +80,7 @@ function getArrayWithoutLastLocation(scope) {
 
 }
 
-function DialogController($scope, $mdDialog, $http, types) {
+function DialogController($scope, $mdDialog, $http, $rootScope, types, coordinates) {
 $scope.timespan = 10;
     $scope.myDate = new Date();
     $scope.minDate = new Date(
@@ -125,6 +106,30 @@ $scope.timespan = 10;
         $mdDialog.hide(answer);
 
     };
+
+    $scope.addPin = function() {
+        $scope.eventz = {
+            type: $scope.type,
+            name: $scope.place,
+            description: $scope.user.biography,
+            start: $scope.minDate,
+            end: $scope.maxDate,
+            people: [1],
+            x: coordinates.getLongitude(),
+            y: coordinates.getLatitude()
+        }
+        $http.post('api/add/event', $scope.eventz)
+        .then(function(response) {
+            console.log(response);    
+        });
+        
+        console.log(coordinates.getLongitude());
+        console.log(coordinates.getLatitude());
+       /* $http.post("api/add/event", $rootScope)
+        .then(function(response) {
+
+        })*/
+    }
 }
 
 

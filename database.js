@@ -56,7 +56,7 @@ exports.findEvents = function(){
   return Event.find();
 }
 
-exports.addEvent = function(object, user) { //object is the
+exports.addEvent = function(object) { //object is the
   var x = parseFloat(object.x);
   var y = parseFloat(object.y);
 
@@ -67,7 +67,7 @@ exports.addEvent = function(object, user) { //object is the
     description: object.description,
     start: new Date(object.start),
     end: new Date(object.end),
-    people: [user.id]
+    people: [1] // Make user
   });
 
   return event.save();

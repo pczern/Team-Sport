@@ -1,3 +1,5 @@
+//out of use//
+
 angular.module('ngApp',[])
 .controller('EventArgumentsCtrl', function($scope) {
   var map;

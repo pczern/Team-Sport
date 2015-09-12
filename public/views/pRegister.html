@@ -1,8 +1,9 @@
 <div layout="row" layout-align="center center">
 
-  <div class="login">
-    <h1>#SocialRunning</h1>
+    <div class="login">
+        <h1>#SocialRunning</h1>
         <h3 class="h3">Register</h3>
+<<<<<<< HEAD
       <form name="clientRegister" ng-submit="register()">
         <md-input-container>
           <md-icon class="material-icons name" md-font-icon="accessibility" >accessibility</md-icon>
@@ -27,15 +28,40 @@
           </div>
         </md-input-container>
         
+=======
+        <form name="clientRegister" ng-submit="register()" class="form">
+            <md-input-container>
+                <md-icon class="material-icons name" md-font-icon="accessibility">accessibility</md-icon>
+                <input ng-model="username" name="userName" type="text" placeholder="Name" ng-required="true">
+                <div ng-show="clientLogin.userName.$touched" ng-messages="clientLogin.userName.$error">
+                    <div ng-message="required">Your full name is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <md-icon class="material-icons name" md-font-icon="email">email</md-icon>
+                <input ng-model="email" name="userMail" type="email" placeholder="Name" ng-required="true">
+                <div ng-show="clientLogin.userMail.$touched" ng-messages="clientLogin.userMail.$error">
+                    <div ng-message="required">Your full name is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container md-no-float>
+                <!-- Use floating placeholder instead of label -->
+                <md-icon class="material-icons" md-font-icon="email">email</md-icon>
+                <input ng-model="password" type="password" placeholder="Password" ng-required="true" name="userPassword">
+                <div ng-show="clientLogin.userPassword.$touched" ng-messages="clientLogin.userPassword.$error">
+                    <div ng-message="required">Your password is required.</div>
+                </div>
+            </md-input-container>
+>>>>>>> 7c9540330f3536cddf14a6474a8758ff91227233
 
-        <md-button type="submit" class="md-raised md-primary">Register</md-button>
-        <md-button type="button" class="md-no-ink" ng-href="#/">Login</md-button>
-      </form>
-    <footer>
-      <p>Made by: Unsere Namen</p>
-    </footer>
+            <md-button type="submit" class="md-raised md-primary">Register</md-button>
+            <md-button type="button" class="md-no-ink" ng-href="#/">Login</md-button>
+        </form>
+        <footer>
+            <p>Made by: Unsere Namen</p>
+        </footer>
 
-  </div>
+    </div>
 
 
 </div>

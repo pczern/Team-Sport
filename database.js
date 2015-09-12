@@ -30,7 +30,7 @@ exports.login = function(username, password) {
 //Registrieren
 exports.register = function(username, password, email) {
 	return User.findOne({
-		name: req.body.name
+		name: username
 	}).exec().then(function(user){
 		if (user) {
 			throw "Benutzer existiert bereits!"

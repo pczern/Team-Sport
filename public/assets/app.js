@@ -23,6 +23,10 @@ angular.module('runningApp',[
         .when('/register', {
             templateUrl: 'views/pRegister.html',
             controller: 'registerCtrl'
+        })
+        .when("/addevent", {
+            templateUrl: "views/pAddEvent.html",
+            controller: "addeventCtrl.runningApp"
         });
 
 

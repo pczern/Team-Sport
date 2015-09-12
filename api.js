@@ -25,21 +25,29 @@ router.post('/login', urlEncoded, (request, response) => {
 router.post('/register', urlEncoded, (request, response) => {
   database.register(request.body.username, request.body.email, request.body.password)
   .then(() => response.cookie(userCookie, user).jsonp({success: true}))
-  .catch((error) => response.jsonp({success: false, error: error}));
+  .catch((error) => {
+    console.warn(error);
+    response.jsonp({success: false, error: error})
+  });
 });
 
 router.use(cookieParser());
 
-router.get('/find/locations', (request, response) => {
-  database.findLocations()
+router.get('/find/events', (request, response) => {
+  database.findEvents()
   .then((locations) => response.jsonp(locations))
   .catch((error) => response.jsonp({success: false, error: error}));
 });
 
-router.post('/add/location', urlEncoded, (request, response) => {
-  database.addLocation(request.body)
+router.post('/add/event', urlEncoded, (request, response) => {
+  database.addEvent(request.body)
   .then(() => response.jsonp({success: true}))
   .catch((error) => response.jsonp({success: false, error: error}));
+});
+
+router.get('/get/street', (request, response) => {
+  database.getStreet()
+  .then(() => response)
 });
 
 router.post('/location/:id/enter', (request, response) => {
@@ -51,5 +59,7 @@ router.post('/location/:id/enter', (request, response) => {
   }).then(() => response.jsonp({success: true}))
   .catch((error) => response.jsonp({success: false, error: error}));
 });
+
+router.get('/')
 
 module.exports = router;

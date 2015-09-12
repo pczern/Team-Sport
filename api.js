@@ -29,4 +29,16 @@ router.post('/add/location', urlEncoded, (request, response) => {
   .catch((error) => response.jsonp({success: false, error: error}));
 });
 
+router.post('/login', urlEncoded, (request, response) => {
+  database.login(request.body.username, request.body.password)
+  .then(() => response.jsonp({success: true}));
+  .catch((error) => response.jsonp({success: false, error: error}));
+});
+
+router.post('/register', urlEncoded, (request, response) => {
+  database.register(request.body.username, request.body.email, request.body.password)
+  .then(() => response.jsonp({success: true}));
+  .catch((error) => response.jsonp({success: false, error: error}));
+});
+
 module.exports = router;

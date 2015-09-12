@@ -36,15 +36,9 @@ angular.module('mainCtrl.runningApp', [])
                             map: $scope.map
                         });
                         map.panTo($scope.lastLocation);
-<<<<<<< HEAD
-                    }
-=======
-                    },
-                    function () {
-                        $scope.status = 'You cancelled the dialog.';
 
                     };
->>>>>>> c1061a01ba7b63a4f5d589f354eb90eea96ca741
+
         });
         $scope.message = "I'm awesome!!!";
 

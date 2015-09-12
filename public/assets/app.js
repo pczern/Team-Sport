@@ -1,4 +1,4 @@
-angular.module('runningApp',[
+var app =angular.module('runningApp',[
     'ngMaterial',
     'ngRoute',
     'ngMap',
@@ -38,8 +38,10 @@ angular.module('runningApp',[
   
     }
 
+
 ).factory('types',function(){
     
     var types = ['Joggen','Rennen','Spazieren','Biken','Sudoku'];
     return types;
 });
+

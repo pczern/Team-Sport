@@ -1,0 +1,19 @@
+<md-dialog aria-label="Suche">
+
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+        <h1>Add Sport Event</h1>
+        <md-select placeholder="Sport Type" ng-model="type">
+            <md-option ng-repeat="type in list">{{type}}</md-option>
+        </md-select>
+        <md-input-container>
+            <label>Place</label>
+            <input ng-model="place" type="text">
+        </md-input-container>
+        <md-datepicker ng-model="myDate" placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate" flex style="width: 224px;height:74px"></md-datepicker>
+        <md-select ng-model="searchType">
+            <md-option ng-repeat="type in list">{{type}}</md-option>
+        </md-select>
+        <md-button ng-click="answer($scope.searchText)">Let's go</md-button>
+    </md-dialog-content>
+
+</md-dialog>

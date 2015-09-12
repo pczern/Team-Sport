@@ -30,20 +30,24 @@ exports.login = function(username, password) {
 };
 
 //Registrieren
-exports.register = function(username, password, email) {
+exports.register = function(name, email, password) {
+  console.log(name, email, password);
 	return User.findOne({
-		name: username
-	}).then(function(user){
-		if(user)
-			throw "Benutzer existiert bereits!"
+    name,
+    email
+  }).then(function(user){
+    console.log(user);
 
-	  var user = new User({
-			name: username,
+		if(user !== null)
+			throw "Benutzer existiert bereits!";
+
+	  var newuser = new User({
+			name,
 			password: hash(password),
-		  email: email
+		  email
 		});
 
-    return user.save();
+    return newuser.save();
 	});
 };
 
@@ -57,7 +61,7 @@ exports.addEvent = function(object, user) { //object is the
 
   var event = new Event({
     coordinates: [y, x],
-    name: object.name, // ???
+    name: object.name,
     type: object.type,
     description: object.description,
     start: new Date(object.start),
@@ -79,43 +83,36 @@ exports.enterEvent = function(id, user) { // adds your ID to the event people
 
 //Google Geocoding
 exports.getCoordinates = function(location) {
-  return request.getAsync(`https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&address=${location}`)
+  return request.getAsync(`https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&components=locality:Köln&address=${location}`)
   .then((response, _body) => {
     var body = JSON.parse(_body);
-    //TODO: SECURITY WARNING - O(n^2) code.
-
-    //Locality
-    var candidates = [];
 
     if(body.status === 'ZERO_RESULTS' || body.status === 'OVER_QUERY_LIMIT')
-      return Promise.resolve();
+      throw 'No results.'
 
     if(body.status !== 'OK')
       throw body.error_message;
 
-    body.results.forEach(function(result) {
-      var componentIndex;
-      var isLocality = result['address_components'].some(function(component, index) {
-        return component.types.some(function(type) {
-          if(type === 'locality') {
-            componentIndex = index;
-            return true;
-          }
-
-          return false;
-        });
-      });
-
-      if(isLocality && result['address_components'][componentIndex] === 'Köln')
-        candidates.push(result);
-    });
-
-    return Promise.resolve(candidates[0]);
+    return Promise.resolve(body.results[0].geometry.location);
   });
 }
 
+var getStreet = exports.getStreet = function(latitude, longitude) {
+  return request.getAsync(`https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&address=${location}`)
+  .then((response, _body) => {
+    var body = JSON.parse(_body);
+
+    if(body.status === 'ZERO_RESULTS' || body.status === 'OVER_QUERY_LIMIT')
+      throw 'No results.';
+
+    if(body.status !== 'OK')
+      throw body.error_message;
+
+    return Promise.resolve(body.results[0].formatted_address);
+  });
+}
 
 //Util
 var hash = function(pwd){
-  crypto.createHash('sha256').update(pwd).digest('base64');
+  return crypto.createHash('sha256').update(pwd).digest('base64');
 }

@@ -7,11 +7,8 @@ const database = require('./database');
 const config = require('./config');
 
 const app = express();
-app.get('/', (request, response) => response.sendFile('public/index.html'));
 
-app.get('/login', (request, response) => response.sendFile('public/login.html'));
-
-app.get('/register', (request, response) => response.sendFile('public/register.html'));
+app.use(express.static(__dirname + '/public'));
 
 app.use('/api', require('./api'));
 

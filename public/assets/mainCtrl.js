@@ -16,9 +16,7 @@ angular.module('mainCtrl.runningApp',[])
             $scope.status = 'You said the information was "' + searchText + '".';
         }, function() {
             $scope.status = 'You cancelled the dialog.';
-        }
-            console.log(searchText);
-        );
+        });
       };
     }]);
 

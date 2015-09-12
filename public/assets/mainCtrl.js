@@ -78,7 +78,7 @@ angular.module('mainCtrl.runningApp', [])
                 $mdDialog.cancel();
             };
             $scope.answer = function (answer) {
-                $mdDialog.hide(answer);
+                $mdDialog.hide();
             };
         }
 

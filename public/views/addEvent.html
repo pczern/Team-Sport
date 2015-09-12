@@ -1,28 +1,33 @@
 <md-dialog aria-label="Suche">
-
-    <md-dialog-content style="max-width:800px;max-height:810px; ">
-        <h1>Add Sport Event</h1>
-        <md-select placeholder="Sport Type" ng-model="type">
-            <md-option ng-repeat="type in list">{{type}}</md-option>
-        </md-select>
-        <md-input-container>
-            <label>Place</label>
-            <input ng-model="place" type="text">
-        </md-input-container>
-        <md-datepicker ng-model="myDate" placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
-        <md-select style="margin-right: 20%;" class="time-select"  placeholder="Stunde" ng-model="hour">
-            <md-option ng-repeat="hour in hours">{{hour}}</md-option>
-            
-        </md-select>
-       
-       
-        <md-select class="time-select" placeholder="Minute" ng-model="minute">
-            <md-option ng-repeat="minute in minutes">{{minute}}</md-option>
-            
-        </md-select>
     
-        <div style="clear: both"></div>
-        <md-button ng-click="answer($scope.searchText)">Let's go</md-button>
-    </md-dialog-content>
+        <md-content  class="md-padding">
+    <form name="addForm" ng-submit="addPin()">
+            <md-select placeholder="Sport Type" ng-model="type" required>
+                <md-option ng-repeat="type in list">{{type}}</md-option>
+            </md-select>
+            <md-input-container>
+                <label>Place</label>
+                <input ng-model="place" type="text" required>
+            </md-input-container>
+            <md-datepicker ng-model="myDate" placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker required>
+            <md-select style="margin-right: 20%;" class="time-select"  placeholder="Stunde" ng-model="hour">
+                <md-option ng-repeat="hour in hours">{{hour}}</md-option>
 
+            </md-select>
+
+
+            <md-select class="time-select" placeholder="Minute" ng-model="minute">
+                <md-option ng-repeat="minute in minutes">{{minute}}</md-option>
+
+            </md-select>
+
+            <div style="clear: both"></div>
+            <md-button ng-click="answer($scope.searchText)">Let's go</md-button>
+    </form>
+        </md-content>
+        <div class="md-actions" layout="row"> 
+            <md-button type="button" ng-click=""> Cancel </md-button> 
+            <span flex></span> 
+            <md-button type="submit" class="md-primary"> Set Pin </md-button> 
+        </div>
 </md-dialog>

@@ -1,5 +1,3 @@
-
-
 module.exports = {
   "database": "mongodb://master:master@ds051170.mongolab.com:51170/team-sport",
   "schemas": {
@@ -10,8 +8,8 @@ module.exports = {
   	},
   	"location": {
   		"coordinates": {
-  			"x": String,
-  			"y": String
+        type: [Number],
+        index: '2d'
   		},
   		"name": String,
   		"description": String,

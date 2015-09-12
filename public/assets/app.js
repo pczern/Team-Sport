@@ -1,1 +1,5 @@
-angular.module('runningApp',['ngMaterial']);
+angular.module('runningApp',[
+    'ngMaterial',
+    'ngRoute',
+    'routes.runningApp'
+]);

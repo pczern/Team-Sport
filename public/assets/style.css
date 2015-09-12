@@ -99,3 +99,7 @@ footer img:focus,
 footer a:focus {
   outline: none;
 }
+
+.view{
+    height: 100vh;
+}

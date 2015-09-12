@@ -1,5 +1,12 @@
 angular.module('mainCtrl.runningApp', [])
     .controller('mainCtrl', ['$scope', '$mdDialog', function ($scope, $mdDialog) {
+        $http.get("/api/find/events")
+        .then(function(response) {
+            $scope.locs = response.data;
+            console.log(response.data);
+        }, function(response) {
+            console.log("Error: " + response.data);
+        })
         $scope.positions = [];
         $scope.showAdvanced = function (ev) {
             $mdDialog.show({

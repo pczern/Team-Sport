@@ -17,7 +17,9 @@
   },
   "dependencies": {
     "express": "latest",
-    "mongoose": "latest"
-  }
+    "mongoose": "latest",
+    "cookie-parser": "latest",
+    "body-parser": "latest"
+  },
   "homepage": "https://github.com/speedDeveloper/Team-Sport#readme"
 }

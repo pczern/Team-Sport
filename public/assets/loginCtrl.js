@@ -2,9 +2,9 @@ angular.module('loginCtrl.runningApp', [])
   .controller('loginCtrl', ['$scope', "$http", "$location", '$cookies', function($scope, $http, $location, $cookies) {
     var userCookie = $cookies.get('currentUser');
 
-    if(userCookie != null) {
+    if (userCookie != null) {
       userCookie = JSON.parse(userCookie.substring(2));
-      if(typeof userCookie._id === 'string')
+      if (typeof userCookie._id === 'string')
         $location.path('/main');
     }
 
@@ -25,9 +25,7 @@ angular.module('loginCtrl.runningApp', [])
         if (response.data.success === true) {
           $location.path("/main");
           $rootScope.cookie = response.data.cookie;
-        }
-
-        else {
+        } else {
           alert(response.data.error);
         }
       }, function(response) {

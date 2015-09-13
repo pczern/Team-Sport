@@ -50,7 +50,7 @@ exports.register = function(name, email, password) {
 
 exports.findEvents = function() {
   return Event.find();
-}
+} 
 
 exports.addEvent = function(object, user) { //object is the
   var x = parseFloat(object.x);

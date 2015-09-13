@@ -50,9 +50,10 @@ exports.register = function(name, email, password) {
 
 exports.findEvents = function() {
   return Event.find();
-} 
+}
 
-exports.addEvent = function(object, user) { //object is the
+//object is the event - user is a User instance
+exports.addEvent = function(object, user) {
   var x = parseFloat(object.x);
   var y = parseFloat(object.y);
 
@@ -67,7 +68,6 @@ exports.addEvent = function(object, user) { //object is the
   });
 
   return new Promise((resolve) => event.save((error) => {
-		console.log('success');
 		if(error) throw error;
 
 		resolve();

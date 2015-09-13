@@ -38,13 +38,14 @@ router.use(cookieParser());
 router.get('/find/events', (request, response) => {
   database.findEvents()
   .then((locations) => response.jsonp(locations))
-  .catch((error) => response.jsonp({success: false, error: error}));
+  .catch((error) => response.jsonp({success: false, error: error}))
+  .on('error', function (err) {console.log(err)});
 });
 
 router.post('/add/event', urlEncoded, (request, response) => {
   database.addEvent(request.body)
   .then(() => response.jsonp({success: true}))
-  .catch((error) => response.jsonp({success: false, error: error}));
+  .on('error', function (err) {console.log(err)});
 });
 
 router.get('/get/street', (request, response) => {

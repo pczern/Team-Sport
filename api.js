@@ -58,7 +58,7 @@ router.get('/find/events', (request, response) => {
 });
 
 router.post('/add/event', urlEncoded, (request, response) => {
-  database.addEvent(request.body, request.cookies.)
+  database.addEvent(request.body, request.cookies[userCookie])
     .then(() => response.jsonp({
       success: true
     }))

@@ -1,5 +1,5 @@
 angular.module('registerCtrl.runningApp', [])
-  .controller('registerCtrl', ['$scope', "$http", "$location", "rootScope", function($scope, $http, $location, $rootScope) {
+  .controller('registerCtrl', ['$scope', "$http", "$location", "$rootScope", function($scope, $http, $location, $rootScope) {
     $scope.greeting = "Woohoo2!!!";
     $scope.register = function() {
       var user = {

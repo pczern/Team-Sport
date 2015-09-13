@@ -63,7 +63,7 @@ exports.addEvent = function(object, user) { //object is the
     description: object.description,
     start: new Date(object.start),
     end: new Date(object.end),
-    people: [1] // Make user
+    people: [user._id] // Make user
   });
 
   return event.save();

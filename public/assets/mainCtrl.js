@@ -1,5 +1,5 @@
 angular.module('mainCtrl.runningApp', [])
-    .controller('mainCtrl', ['$scope', '$mdDialog', "$http", "$rootScope", "coordinates", function ($scope, $mdDialog, $http, $rootScope, coordinates) {
+    .controller('mainCtrl', ['$scope', '$mdDialog', "$http", "$rootScope", "$cookies", "coordinates", function ($scope, $mdDialog, $http, $rootScope, $cookies, coordinates) {
         $http.get("/api/find/events")
             .then(function (response) {
                 $scope.locs = response.data;
@@ -85,7 +85,7 @@ function getArrayWithoutLastLocation(scope) {
 
 }
 
-function DialogController($scope, $mdDialog, $http, $rootScope, types, coordinates) {
+function DialogController($scope, $mdDialog, $http, $rootScope, $cookies, types, coordinates) {
     $scope.timespan = 10;
     $scope.myDate = new Date();
     $scope.minDate = new Date(
@@ -113,13 +113,21 @@ function DialogController($scope, $mdDialog, $http, $rootScope, types, coordinat
     };
 
     $scope.addPin = function () {
+      var uid;
+
+      var userCookie = $cookies.get('currentUser');
+      if(userCookie != null) {
+        userCookie = JSON.parse(userCookie.substring(2));
+        if(typeof userCookie._id === 'string')
+          uid = userCookie._id;
+      }
         eventz = {
             type: $scope.type,
             name: $scope.place,
             description: $scope.user.biography,
             start: $scope.minDate,
             end: $scope.maxDate,
-            people: [1],
+            people: [uid],
             x: coordinates.getLongitude(),
             y: coordinates.getLatitude()
         }

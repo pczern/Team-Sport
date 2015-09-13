@@ -3,23 +3,24 @@
         <meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Social Running</title> 
+        <title>Social Running</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-        <link rel="stylesheet" href="assets/style.css">   
+        <link rel="stylesheet" href="assets/style.css">
     </head>
     <body layout="column">
-        <div class="view" ng-view></div>   
+        <div class="view" ng-view></div>
         <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.min.js"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.js"></script>   
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
         <script>angular.module("nemLogging",[]).service("nemSimpleLogger",["$log",function(n){var r,o,t,e,u;return t=["log","info","debug","warn","error"],r={log:1,info:2,debug:3,warn:4,error:5},u=function(n,r,o){return n>=r?o():void 0},e=function(r,o){return null!=n?n[r](o):console[r](o)},new(o=function(){function o(){var n;this.doLog=!0,n={},t.forEach(function(o){return function(t){return n[t]=function(n){return o.doLog?u(r[t],o.currentLevel,function(){return e(t,n)}):void 0}}}(this)),this.LEVELS=r,this.currentLevel=r.error,t.forEach(function(r){return function(o){return r[o]=n[o]}}(this))}return o.prototype.spawn=function(){return new o},o.prototype.setLog=function(r){return n=r},o}())}]);</script>
         <script src="assets/ng-map.min.js"></script>
         <script src="assets/loginCtrl.js"></script>

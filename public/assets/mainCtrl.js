@@ -1,12 +1,12 @@
 angular.module('mainCtrl.runningApp', [])
     .controller('mainCtrl', ['$scope', '$mdDialog', "$http", "$rootScope", "coordinates", function ($scope, $mdDialog, $http, $rootScope, coordinates) {
         $http.get("/api/find/events")
-        .then(function(response) {
-            $scope.locs = response.data;
-            console.log(response.data);
-        }, function(response) {
-            console.log("Error: " + response.data);
-        });
+            .then(function (response) {
+                $scope.locs = response.data;
+                console.log(response.data);
+            }, function (response) {
+                console.log("Error: " + response.data);
+            });
         $scope.positions = [];
         $scope.showAdvanced = function (ev) {
             $mdDialog.show({
@@ -16,39 +16,45 @@ angular.module('mainCtrl.runningApp', [])
                     targetEvent: ev,
                     clickOutsideToClose: true
                 })
-                .then(function (answer) {
-                    $scope.status = 'You said the information was "' + answer + '".';
-                        var marker = new google.maps.Marker({
-                            position: {K: coordinates.getLongitude(), G: coordinates.getLatitude()},
-                            map: $scope.map
+                .then(function (eventz) {
+                    $http.post('api/add/event', eventz)
+                        .then(function (response) {
+                            console.log(response);
                         });
-                            
+                    var marker = new google.maps.Marker({
+                        position: {
+                            K: coordinates.getLongitude(),
+                            G: coordinates.getLatitude()
+                        },
+                        map: $scope.map
+                    });
+
                 }, function () {
                     $scope.status = 'You cancelled the dialog.';
                 });
         };
         $scope.message = "I'm awesome!!!";
         var map;
-                      var event;
+        var event;
         $scope.$on('mapInitialized', function (evt, evtMap) {
-                map = evtMap;
-               
-                $scope.placeMarker = function (e) {
-                    console.log(e.latLng);
-     
-                    coordinates.setCoordinates(e.latLng.K, e.latLng.G);
-                    $scope.map = map;
-                        event = e;
-                        $scope.showAdvanced(event);
+            map = evtMap;
 
-            
-                    };
+            $scope.placeMarker = function (e) {
+                console.log(e.latLng);
+
+                coordinates.setCoordinates(e.latLng.K, e.latLng.G);
+                $scope.map = map;
+                event = e;
+                $scope.showAdvanced(event);
+
+
+            };
 
         });
         $scope.message = "I'm awesome!!!";
 
 
-      
+
 
 
 
@@ -60,9 +66,8 @@ angular.module('mainCtrl.runningApp', [])
                     targetEvent: ev,
                     clickOutsideToClose: true
                 })
-                .then(function (searchText) {
-                    $scope.status = 'You said the information was "' + searchText + '".';
-                    console.log(searchText);
+                .then(function (eventz) {
+                    console.log(eventz);
                 }, function () {
                     $scope.status = 'You cancelled the dialog.';
                 });
@@ -81,7 +86,7 @@ function getArrayWithoutLastLocation(scope) {
 }
 
 function DialogController($scope, $mdDialog, $http, $rootScope, types, coordinates) {
-$scope.timespan = 10;
+    $scope.timespan = 10;
     $scope.myDate = new Date();
     $scope.minDate = new Date(
         $scope.myDate.getFullYear(),
@@ -107,8 +112,8 @@ $scope.timespan = 10;
 
     };
 
-    $scope.addPin = function() {
-        $scope.eventz = {
+    $scope.addPin = function () {
+        eventz = {
             type: $scope.type,
             name: $scope.place,
             description: $scope.user.biography,
@@ -118,17 +123,16 @@ $scope.timespan = 10;
             x: coordinates.getLongitude(),
             y: coordinates.getLatitude()
         }
-        $http.post('api/add/event', $scope.eventz)
-        .then(function(response) {
-            console.log(response);    
-        });
-        
+        console.log(eventz);
+
+
         console.log(coordinates.getLongitude());
         console.log(coordinates.getLatitude());
-       /* $http.post("api/add/event", $rootScope)
-        .then(function(response) {
+        $mdDialog.hide(eventz);
+        /* $http.post("api/add/event", $rootScope)
+         .then(function(response) {
 
-        })*/
+         })*/
     }
 }
 

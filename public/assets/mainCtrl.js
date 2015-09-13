@@ -2,6 +2,7 @@ angular.module('mainCtrl.runningApp', [])
     .controller('mainCtrl', ['$scope', '$mdDialog', "$http", "$rootScope", "$cookies", "coordinates", function ($scope, $mdDialog, $http, $rootScope, $cookies, coordinates) {
         $http.get("/api/find/events")
             .then(function (response) {
+              console.log(response.data);
                 $scope.locs = response.data;
                 console.log(response.data);
             }, function (response) {
@@ -17,17 +18,19 @@ angular.module('mainCtrl.runningApp', [])
                     clickOutsideToClose: true
                 })
                 .then(function (eventz) {
+                  console.log(eventz)
                     $http.post('api/add/event', eventz)
                         .then(function (response) {
-                            console.log(response);
+                          console.log('added')
+                          $http.get("/api/find/events")
+                              .then(function (response) {
+                                console.log(response.data);
+                                  $scope.locs = response.data;
+                                  console.log(response.data);
+                              }, function (response) {
+                                  console.log("Error: " + response.data);
+                              });
                         });
-                    var marker = new google.maps.Marker({
-                        position: {
-                            K: coordinates.getLongitude(),
-                            G: coordinates.getLatitude()
-                        },
-                        map: $scope.map
-                    });
 
                 }, function () {
                     $scope.status = 'You cancelled the dialog.';
@@ -121,33 +124,19 @@ function DialogController($scope, $mdDialog, $http, $rootScope, $cookies, types,
         if(typeof userCookie._id === 'string')
           uid = userCookie._id;
       }
-      var startDate = new Date($scope.myDate);
-      startDate.setHours($scope.hour);
-      startDate.setMinutes($scope.minute);
-      var endDate = new Date($scope.myDate);
-      endDate.setHours($scope.hour);
-      endDate.setMinutes($scope.minute);
-       endDate = new Date(endDate.getTime() + $scope.timespan*60000);
         eventz = {
             type: $scope.type,
             name: $scope.place,
             description: $scope.user.biography,
-            start:startDate,
-            end: endDate,
+            start: $scope.myDate,
+            timespan: $scope.timespan,
             people: [uid],
             x: coordinates.getLongitude(),
-            y: coordinates.getLatitude()
+            y: coordinates.getLatitude(),
+            coordinates: [coordinates.getLongitude(), coordinates.getLatitude()]
         }
         console.log(eventz);
-
-
-        console.log(coordinates.getLongitude());
-        console.log(coordinates.getLatitude());
         $mdDialog.hide(eventz);
-        /* $http.post("api/add/event", $rootScope)
-         .then(function(response) {
-
-         })*/
     }
 }
 

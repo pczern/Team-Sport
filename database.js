@@ -62,11 +62,16 @@ exports.addEvent = function(object, user) { //object is the
     type: object.type,
     description: object.description,
     start: new Date(object.start),
-    end: new Date(object.end),
+    timespan: object.timespan,
     people: [user._id] // Make user
   });
 
-  return event.save();
+  return new Promise((resolve) => event.save((error) => {
+		console.log('success');
+		if(error) throw error;
+
+		resolve();
+	}));
 }
 
 //id = event id

@@ -7,7 +7,8 @@ angular.module('registerCtrl.runningApp', [])
         'email': $scope.email,
         'password': $scope.password
       };
-      alert(user.password);
+
+
       $http({
         method: 'POST',
         url: '/api/signup',

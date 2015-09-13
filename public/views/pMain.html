@@ -8,7 +8,7 @@
         <md-button class="md-icon-button" aria-label="More" ng-click="showSearch()">
             <md-icon class="material-icons name" md-font-icon="search" >search</md-icon>
         </md-button>
-       
+
     </div>
 </md-toolbar>
 <div  layout-fill>
@@ -18,9 +18,11 @@
 
         <!--Die Karte -->
         <map center="-25.363882,131.044922" zoom="4" on-click="placeMarker()">
-          <info-window position="current-location" visible="true">
+          <info-window position="current-location" visible="false">
       <span>Location found using HTML5.</span>
     </info-window>
+
+    <marker ng-repeat="pos in locs" position="{{pos.coordinates[1]}}, {{pos.coordinates[0]}}"></marker>
         </map>
         </md-content>
     </div>

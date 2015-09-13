@@ -121,12 +121,19 @@ function DialogController($scope, $mdDialog, $http, $rootScope, $cookies, types,
         if(typeof userCookie._id === 'string')
           uid = userCookie._id;
       }
+      var startDate = new Date($scope.myDate);
+      startDate.setHours($scope.hour);
+      startDate.setMinutes($scope.minute);
+      var endDate = new Date($scope.myDate);
+      endDate.setHours($scope.hour);
+      endDate.setMinutes($scope.minute);
+       endDate = new Date(endDate.getTime() + $scope.timespan*60000);
         eventz = {
             type: $scope.type,
             name: $scope.place,
             description: $scope.user.biography,
-            start: $scope.minDate,
-            end: $scope.maxDate,
+            start:startDate,
+            end: endDate,
             people: [uid],
             x: coordinates.getLongitude(),
             y: coordinates.getLatitude()

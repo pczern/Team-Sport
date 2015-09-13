@@ -17,46 +17,42 @@ mongoose.connect(config.database);
 
 //Login
 exports.login = function(username, password) {
-	return User.findOne({
-		name: username
-	}).then(function(user){
-		if (user === null)
-			throw "Benutzer existiert nicht!"
-		else if (user.password != password)
-			throw "Falsches Passwort!"
+  return User.findOne({
+    name: username
+  }).then(function(user) {
+    if (user === null)
+      throw "Benutzer existiert nicht!"
+    else if (user.password != hash(password))
+      throw "Falsches Passwort!"
 
-		return user;
-	});
+    return user;
+  });
 };
 
 //Registrieren
 exports.register = function(name, email, password) {
-  console.log("Server: " + name);
-	return User.findOne({
-    name:name
-  }).then(function(user){
-    console.log(user);
+  return User.findOne({
+    name: name
+  }).then(function(user) {
+    if (user !== null)
+      throw "Benutzer existiert bereits!";
+    else {
+      var newuser = new User({
+        name: name,
+        password: hash(password),
+        email: email
+      });
 
-		if(user !== null) {
-			throw "Benutzer existiert bereits!";
-    } else { 
-
-	  var newuser = new User({
-			name: name,
-			password: password,
-		  email: email
-		});
-
-    return newuser.save();
-	};
-});
+      return newuser.save();
+    }
+  });
 };
 
-exports.findEvents = function(){
+exports.findEvents = function() {
   return Event.find();
 }
 
-exports.addEvent = function(object) { //object is the
+exports.addEvent = function(object, user) { //object is the
   var x = parseFloat(object.x);
   var y = parseFloat(object.y);
 
@@ -75,45 +71,47 @@ exports.addEvent = function(object) { //object is the
 
 //id = event id
 exports.enterEvent = function(id, user) { // adds your ID to the event people
-  return Event.find({id})
-  .then(function(event) {
-    event.people.push(user.id);
-    return event.save();
-  });
+  return Event.find({
+      id
+    })
+    .then(function(event) {
+      event.people.push(user.id);
+      return event.save();
+    });
 }
 
 //Google Geocoding
 exports.getCoordinates = function(location) {
   return request.getAsync('https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&components=locality:Köln&address=${location}')
-  .then((response, _body) => {
-    var body = JSON.parse(_body);
+    .then((response, _body) => {
+      var body = JSON.parse(_body);
 
-    if(body.status === 'ZERO_RESULTS' || body.status === 'OVER_QUERY_LIMIT')
-      throw 'No results.'
+      if (body.status === 'ZERO_RESULTS' || body.status === 'OVER_QUERY_LIMIT')
+        throw 'No results.'
 
-    if(body.status !== 'OK')
-      throw body.error_message;
+      if (body.status !== 'OK')
+        throw body.error_message;
 
-    return Promise.resolve(body.results[0].geometry.location);
-  });
+      return body.results[0].geometry.location;
+    });
 }
 
 var getStreet = exports.getStreet = function(latitude, longitude) {
   return request.getAsync("https://maps.googleapis.com/maps/api/geocode/json?key=${config.maps}&address=${location}")
-  .then((response, _body) => {
-    var body = JSON.parse(_body);
+    .then((response, _body) => {
+      var body = JSON.parse(_body);
 
-    if(body.status === 'ZERO_RESULTS' || body.status === 'OVER_QUERY_LIMIT')
-      throw 'No results.';
+      if (body.status === 'ZERO_RESULTS' || body.status === 'OVER_QUERY_LIMIT')
+        throw 'No results.';
 
-    if(body.status !== 'OK')
-      throw body.error_message;
+      if (body.status !== 'OK')
+        throw body.error_message;
 
-    return Promise.resolve(body.results[0].formatted_address);
-  });
+      return body.results[0].formatted_address;
+    });
 }
 
 //Util
-/*var hash = function(pwd){
+var hash = function(pwd){
   return crypto.createHash('sha256').update(pwd).digest('base64');
-}*/
+}

@@ -15,7 +15,7 @@ module.exports = {
   		"type": String,
   		"description": String,
   		"start": Date,
-      "end": Date,
+      "timespan": Number,
   		"people": Array // ids
   	}
   },

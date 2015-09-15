@@ -3,27 +3,56 @@
         <h1>#SocialRunning</h1>
         <span flex></span>
         <md-button class="md-icon-button" aria-label="More">
-            <md-icon class="material-icons name" md-font-icon="more_vert" >more_vert</md-icon>
+            <md-icon class="material-icons name" md-font-icon="more_vert">more_vert</md-icon>
         </md-button>
         <md-button class="md-icon-button" aria-label="More" ng-click="showSearch()">
-            <md-icon class="material-icons name" md-font-icon="search" >search</md-icon>
+            <md-icon class="material-icons name" md-font-icon="search">search</md-icon>
         </md-button>
 
     </div>
 </md-toolbar>
-<div  layout-fill>
+<div layout-fill>
 
     <div layout="row" flex id="content">
-        <md-content layout="column" flex >
+        <md-content layout="column" flex>
 
-        <!--Die Karte -->
-        <map center="50.9364,6.9528" zoom="14" on-click="placeMarker()">
-          <info-window position="current-location" visible="false">
-            <span>Sie sind hier!</span>
-          </info-window>
+            <!--Die Karte -->
+            <map center="50.9364,6.9528" zoom="14" on-click="placeMarker()">
+                <info-window position="current-location" visible="false">
+                    <span>Sie sind hier!</span>
+                </info-window>
 
-    <marker ng-repeat="pos in locs" position="{{pos.coordinates[1]}}, {{pos.coordinates[0]}}"></marker>
-        </map>
+                <div ng-repeat="pos in locs">
+
+
+
+                    <marker id="{{foo+pos.coordinates[1]}}" position="{{pos.coordinates[1]}}, {{pos.coordinates[0]}}" on-click="showInfoWindow(event, {{1+pos.coordinates[1]}})"></marker>
+
+
+                    <info-window id="{{1+pos.coordinates[1]}}" visible-on-marker="{{foo+pos.coordinates[1]}}">
+                        <div>
+                            <!--                    <div ng-non-bindable="">-->
+                            <div id="siteNotice"></div>
+                            <h1 id="firstHeading" class="firstHeading">{{pos.type}} - {{pos.name}}</h1>
+                            <div id="bodyContent">
+                                <p>{{pos.start}}</p>
+                                <p>{{pos.timespan}}</p>
+                                <p>{{pos.description}}</p>
+                                <p ng-repeat="u in pos.people">{{pos.u}}</p>
+
+                            </div>
+                        </div>
+                    </info-window>
+
+                </div>
+                <!--
+           <info-window id="marker-info">
+    <h4>{{this.getPosition()}}</h4>
+    <p>{{pos2.name}}</p>
+
+</info-window>
+-->
+            </map>
         </md-content>
     </div>
 </div>
